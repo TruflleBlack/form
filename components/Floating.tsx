@@ -1,17 +1,14 @@
 // components/Floating.tsx
-import React, { ReactElement, InputHTMLAttributes, TextareaHTMLAttributes } from 'react';
+import React from 'react';
 
 export type FloatingProps = {
   id: string;
   label: string;
-  children: ReactElement<InputHTMLAttributes<HTMLInputElement>> | ReactElement<TextareaHTMLAttributes<HTMLTextAreaElement>>;
+  children: React.ReactElement<{ id?: string; placeholder?: string; className?: string }>;
 };
 
 export function Floating({ id, label, children }: FloatingProps) {
-  const className =
-    (children.props as InputHTMLAttributes<HTMLInputElement>).className ||
-    (children.props as TextareaHTMLAttributes<HTMLTextAreaElement>).className ||
-    '';
+  const className = (children.props as { className?: string }).className || '';
   const child = React.cloneElement(children, {
     id,
     placeholder: ' ',
