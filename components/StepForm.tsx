@@ -24,18 +24,18 @@ type Acara = { nama: string; tanggal: string; waktu: string; tempat: string; lin
 type Story = { judul: string; tanggal: string; deskripsi: string; };
 
 // Fungsi konversi "00:00:24" ke detik (24)
-function timeStringToSeconds(str: string) { // Added type annotation for 'str'
-  if (!str) return '';
-  const parts = str.split(':').map(Number);
-  if (parts.length === 3) {
-    return parts[0] * 3600 + parts[1] * 60 + parts[2];
-  } else if (parts.length === 2) {
-    return parts[0] * 60 + parts[1];
-  } else if (parts.length === 1) {
-    return parts[0];
-  }
-  return '';
-}
+// function timeStringToSeconds(str: string) {
+//   if (!str) return '';
+//   const parts = str.split(':').map(Number);
+//   if (parts.length === 3) {
+//     return parts[0] * 3600 + parts[1] * 60 + parts[2];
+//   } else if (parts.length === 2) {
+//     return parts[0] * 60 + parts[1];
+//   } else if (parts.length === 1) {
+//     return parts[0];
+//   }
+//   return '';
+// }
 
 export default function StepForm({ tokenData }: StepFormProps) {
   const steps = [
@@ -454,13 +454,6 @@ export default function StepForm({ tokenData }: StepFormProps) {
 
     return msg;
   };
-
-  // --- NEW: Get selected theme/sub-theme data for display ---
-  const selectedThemeData = temaUndangan ? themePreviews[temaUndangan as keyof typeof themePreviews] : null;
-  const selectedSubThemeData = (temaUndangan === 'Minimalist Luxury' && subTema && selectedThemeData && 'subThemes' in selectedThemeData)
-    ? selectedThemeData.subThemes[subTema as LuxuryTheme]
-    : null;
-  // --- END NEW ---
 
   // Tambahkan array sub tema adat dan animasi adat (dengan label dan urutan baru)
   const adatLabels = [
