@@ -10,7 +10,7 @@ import { Floating } from './Floating';
 dayjs.extend(utc);
 dayjs.extend(customParseFormat);
 
-const API_BASE = '/api';
+const API_BASE = 'https://sistemundangan.wuaze.com/api';
 
 export type TokenData = {
   token: string;
