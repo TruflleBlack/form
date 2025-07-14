@@ -2,7 +2,7 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import StepForm from '../../components/StepForm';
 
 type TokenData = {
@@ -12,14 +12,14 @@ type TokenData = {
   status: 'belum isi' | 'sudah isi';
 };
 
-export default function FormPage() {
+function FormPageInner() {
   const params = useSearchParams();
   const token = params.get('token')!;
   const [tokenData, setTokenData] = useState<TokenData | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch(`https://sistemundangan.wuaze.com/api/token.php?token=${encodeURIComponent(token)}`, {
+    fetch(`http://localhost/undangansistem/backend/api/token.php?token=${encodeURIComponent(token)}`, {
       mode: 'cors',
     })
       .then(r => r.json())
@@ -49,5 +49,13 @@ export default function FormPage() {
     <main className="…">
       <StepForm tokenData={tokenData} />
     </main>
+  );
+}
+
+export default function FormPage() {
+  return (
+    <Suspense>
+      <FormPageInner />
+    </Suspense>
   );
 }
