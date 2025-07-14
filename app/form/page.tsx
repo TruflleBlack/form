@@ -19,7 +19,7 @@ export default function FormPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch(`http://localhost/undangansistem/backend/api/token.php?token=${encodeURIComponent(token)}`, {
+    fetch(`https://sistemundangan.wuaze.com/api/token.php?token=${encodeURIComponent(token)}`, {
       mode: 'cors',
     })
       .then(r => r.json())
