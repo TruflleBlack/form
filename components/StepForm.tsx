@@ -6,7 +6,6 @@ import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { Floating } from './Floating';
-import Image from 'next/image';
 
 dayjs.extend(utc);
 dayjs.extend(customParseFormat);
@@ -170,45 +169,68 @@ export default function StepForm({ tokenData }: StepFormProps) {
   }), [luxuryLinks]);
   // --- END NEW ---
 
-  // Tambahkan array sub tema luxury dan animasi
+  // Luxury SubThemes
   const luxurySubThemes = Array.from({length: 11}, (_, i) => ({
-    key: `Luxury ${String(i+1).padStart(2, '0')}`,
+    key: `LUXURY-${String(i+1).padStart(2, '0')}`,
     label: `Luxury ${String(i+1).padStart(2, '0')}`,
-    image: `/images/subthemes/luxury-${String(i+1).padStart(2, '0')}.jpg`,
+    image: `/images/subthemes/LUXURY-${String(i+1).padStart(2, '0')}.jpg`,
   }));
   // Luxury Animasi
   const animasiThemes = Array.from({length: 11}, (_, i) => ({
-    key: `Animasi ${String(i+1).padStart(2, '0')}`,
+    key: `LUXURY-${String(i+1).padStart(2, '0')}-ANIMASI`,
     label: `Luxury ${String(i+1).padStart(2, '0')}`,
-    image: `/images/subthemes/luxury-${String(i+1).padStart(2, '0')}-animasi.jpg`,
+    image: `/images/subthemes/LUXURY-${String(i+1).padStart(2, '0')}-ANIMASI.jpg`,
   }));
-
-  // Tambahkan array sub tema spesial dan animasi spesial
+  // Spesial SubThemes
   const spesialSubThemes = Array.from({length: 10}, (_, i) => ({
-    key: `Spesial ${String(i+1).padStart(2, '0')}`,
+    key: `SPESIAL-${String(i+1).padStart(2, '0')}`,
     label: `Spesial ${String(i+1).padStart(2, '0')}`,
-    image: `/images/subthemes/spesial-${String(i+1).padStart(2, '0')}.jpg`,
+    image: `/images/subthemes/SPESIAL-${String(i+1).padStart(2, '0')}.jpg`,
   }));
   // Spesial Animasi
   const spesialAnimasiThemes = Array.from({length: 10}, (_, i) => ({
-    key: `Spesial Animasi ${String(i+1).padStart(2, '0')}`,
+    key: `SPESIAL-${String(i+1).padStart(2, '0')}-ANIMASI`,
     label: `Spesial ${String(i+1).padStart(2, '0')}`,
-    image: `/images/subthemes/spesial-${String(i+1).padStart(2, '0')}-animasi.jpg`,
+    image: `/images/subthemes/SPESIAL-${String(i+1).padStart(2, '0')}-ANIMASI.jpg`,
   }));
-
-  // Tambahkan array sub tema premium vintage dan animasi premium vintage
+  // Premium Vintage SubThemes
   const premiumVintageSubThemes = Array.from({length: 8}, (_, i) => ({
-    key: `Premium-vintage-${String(i+1).padStart(2, '0')}`,
+    key: `Premium-Vintage-${String(i+1).padStart(2, '0')}`,
     label: `Vintage ${String(i+1).padStart(2, '0')}`,
-    image: `/images/subthemes/Premium-vintage-${String(i+1).padStart(2, '0')}.jpg`,
+    image: `/images/subthemes/Premium-Vintage-${String(i+1).padStart(2, '0')}.jpg`,
     link: `https://inv.wekita.id/vintage-${String(i+1).padStart(2, '0')}/`
   }));
-  // Vintage Animasi
+  // Premium Vintage Animasi
   const premiumVintageAnimasiThemes = Array.from({length: 8}, (_, i) => ({
-    key: `Premium-vintage-${String(i+1).padStart(2, '0')}-ANIMASI`,
+    key: `Premium-Vintage-${String(i+1).padStart(2, '0')}-ANIMASI`,
     label: `Vintage ${String(i+1).padStart(2, '0')}`,
-    image: `/images/subthemes/Premium-vintage-${String(i+1).padStart(2, '0')}-animasi.jpg`,
+    image: `/images/subthemes/Premium-Vintage-${String(i+1).padStart(2, '0')}-ANIMASI.jpg`,
     link: `https://inv.wekita.id/vintage-${String(i+1).padStart(2, '0')}-animasi/`
+  }));
+  // Adat SubThemes
+  const adatLabels = [
+    'TEMA-BALI',
+    'TEMA-BATAK',
+    'TEMA-BUGIS',
+    'TEMA-CHINESE',
+    'TEMA-MELAYU',
+    'TEMA-MINANG',
+    'TEMA-WAYANG-01',
+    'TEMA-WAYANG-02',
+    'TEMA-WAYANG-03',
+    'TEMA-WAYANG-04',
+  ];
+  const adatSubThemes = adatLabels.map(label => ({
+    key: label,
+    label: label.replace('TEMA-', 'Tema '),
+    image: `/images/subthemes/${label}.jpg`,
+    link: `https://inv.wekita.id/${label.replace('TEMA-', '').toLowerCase()}`
+  }));
+  const adatAnimasiSubThemes = adatLabels.map(label => ({
+    key: `${label}-ANIMASI`,
+    label: label.replace('TEMA-', 'Tema '),
+    image: `/images/subthemes/${label}-ANIMASI.jpg`,
+    link: `https://inv.wekita.id/animasi-${label.replace('TEMA-', '').toLowerCase()}`
   }));
 
   // Load existing data if token has been used before
@@ -503,40 +525,6 @@ export default function StepForm({ tokenData }: StepFormProps) {
     return msg;
   };
 
-  // Tambahkan array sub tema adat dan animasi adat (dengan label dan urutan baru)
-  const adatLabels = [
-    'Tema Bali',
-    'Tema Batak',
-    'Tema Bugis',
-    'Tema Chinese',
-    'Tema Melayu',
-    'Tema Minang',
-    'Tema Wayang-01',
-    'Tema Wayang-02',
-    'Tema Wayang-03',
-    'Tema Wayang-04',
-  ];
-  const adatSubThemes = adatLabels.map(label => {
-    const imgLabel = label.toUpperCase().replace(/ /g, '-');
-    const daerah = label.replace(/^Tema /i, '').toLowerCase();
-    return {
-      key: label,
-      label: label,
-      image: `/images/subthemes/${imgLabel}.jpg`,
-      link: `https://inv.wekita.id/${daerah}`
-    };
-  });
-  const adatAnimasiSubThemes = adatLabels.map(label => {
-    const imgLabel = label.toUpperCase().replace(/ /g, '-') + '-ANIMASI';
-    const daerah = label.replace(/^Tema /i, '').toLowerCase();
-    return {
-      key: label + '-ANIMASI',
-      label: label, // tanpa embel-embel animasi
-      image: `/images/subthemes/${imgLabel}.jpg`,
-      link: `https://inv.wekita.id/animasi-${daerah}`
-    };
-  });
-
   // Render
   return (
     <div className="min-h-screen bg-[#8A2D3B] py-10 px-4 relative">
@@ -669,7 +657,7 @@ export default function StepForm({ tokenData }: StepFormProps) {
                         onClick={()=>setSubTema(sub.label)}
                         className={`group focus:outline-none border-2 rounded-xl overflow-hidden transition-all duration-200 p-1 ${subTema===sub.label ? 'border-[#B03052] shadow-lg' : 'border-transparent'}`}
                       >
-                        <Image src={sub.image} alt={sub.label} width={200} height={112} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
+                        <img src={sub.image} alt={sub.label} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
                         <div className={`mt-2 text-center text-sm font-medium ${subTema===sub.label ? 'text-[#B03052]' : 'text-gray-700'}`}>{sub.label}</div>
                       </button>
                       <a
@@ -699,7 +687,7 @@ export default function StepForm({ tokenData }: StepFormProps) {
                         onClick={()=>setSubTema(sub.label)}
                         className={`group focus:outline-none border-2 rounded-xl overflow-hidden transition-all duration-200 p-1 ${subTema===sub.label ? 'border-[#B03052] shadow-lg' : 'border-transparent'}`}
                       >
-                        <Image src={sub.image} alt={sub.label} width={200} height={112} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
+                        <img src={sub.image} alt={sub.label} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
                         <div className={`mt-2 text-center text-sm font-medium ${subTema===sub.label ? 'text-[#B03052]' : 'text-gray-700'}`}>{sub.label}</div>
                       </button>
                       <a
@@ -731,7 +719,7 @@ export default function StepForm({ tokenData }: StepFormProps) {
                         onClick={()=>setSubTema(anim.label)}
                         className={`group focus:outline-none border-2 rounded-xl overflow-hidden transition-all duration-200 p-1 ${subTema===anim.label ? 'border-[#B03052] shadow-lg' : 'border-transparent'}`}
                       >
-                        <Image src={anim.image} alt={anim.label} width={200} height={112} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
+                        <img src={anim.image} alt={anim.label} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
                         <div className={`mt-2 text-center text-sm font-medium ${subTema===anim.label ? 'text-[#B03052]' : 'text-gray-700'}`}>{`Luxury Animasi ${String(idx+1).padStart(2, '0')}`}</div>
                       </button>
                       <a
@@ -762,7 +750,7 @@ export default function StepForm({ tokenData }: StepFormProps) {
                         onClick={()=>setSubTema(anim.label)}
                         className={`group focus:outline-none border-2 rounded-xl overflow-hidden transition-all duration-200 p-1 ${subTema===anim.label ? 'border-[#B03052] shadow-lg' : 'border-transparent'}`}
                       >
-                        <Image src={anim.image} alt={anim.label} width={200} height={112} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
+                        <img src={anim.image} alt={anim.label} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
                         <div className={`mt-2 text-center text-sm font-medium ${subTema===anim.label ? 'text-xs text-pink-700 mb-4' : 'text-gray-700'}`}>{`Spesial Animasi ${String(idx+1).padStart(2, '0')}`}</div>
                       </button>
                       <a
@@ -793,7 +781,7 @@ export default function StepForm({ tokenData }: StepFormProps) {
                         onClick={()=>setSubTema(sub.label)}
                         className={`group focus:outline-none border-2 rounded-xl overflow-hidden transition-all duration-200 p-1 bg-white max-w-[160px] mx-auto ${subTema===sub.label ? 'border-[#B03052] shadow-lg' : 'border-transparent'}`}
                       >
-                        <Image src={sub.image} alt={sub.label} width={200} height={112} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
+                        <img src={sub.image} alt={sub.label} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
                         <div className={`mt-2 text-center text-sm font-medium ${subTema===sub.label ? 'text-[#B03052]' : 'text-gray-700'}`}>{sub.label}</div>
                       </button>
                       <a
@@ -823,7 +811,7 @@ export default function StepForm({ tokenData }: StepFormProps) {
                         onClick={()=>setSubTema(anim.label)}
                         className={`group focus:outline-none border-2 rounded-xl overflow-hidden transition-all duration-200 p-1 bg-white max-w-[160px] mx-auto ${subTema===anim.label ? 'border-[#B03052] shadow-lg' : 'border-transparent'}`}
                       >
-                        <Image src={anim.image} alt={anim.label} width={200} height={112} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
+                        <img src={anim.image} alt={anim.label} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
                         <div className={`mt-2 text-center text-sm font-medium ${subTema===anim.label ? 'text-[#B03052]' : 'text-gray-700'}`}>{anim.label}</div>
                       </button>
                       <a
@@ -853,7 +841,7 @@ export default function StepForm({ tokenData }: StepFormProps) {
                         onClick={()=>setSubTema(sub.label)}
                         className={`group focus:outline-none border-2 rounded-xl overflow-hidden transition-all duration-200 p-1 bg-white max-w-[160px] mx-auto ${subTema===sub.label ? 'border-[#B03052] shadow-lg' : 'border-transparent'}`}
                       >
-                        <Image src={sub.image} alt={sub.label} width={200} height={112} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
+                        <img src={sub.image} alt={sub.label} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
                         <div className={`mt-2 text-center text-sm font-medium ${subTema===sub.label ? 'text-[#B03052]' : 'text-gray-700'}`}>{sub.label}</div>
                       </button>
                       <a
@@ -883,7 +871,7 @@ export default function StepForm({ tokenData }: StepFormProps) {
                         onClick={()=>setSubTema(anim.label)}
                         className={`group focus:outline-none border-2 rounded-xl overflow-hidden transition-all duration-200 p-1 bg-white max-w-[160px] mx-auto ${subTema===anim.label ? 'border-[#B03052] shadow-lg' : 'border-transparent'}`}
                       >
-                        <Image src={anim.image} alt={anim.label} width={200} height={112} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
+                        <img src={anim.image} alt={anim.label} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
                         <div className={`mt-2 text-center text-sm font-medium ${subTema===anim.label ? 'text-[#B03052]' : 'text-gray-700'}`}>{anim.label}</div>
                       </button>
                       <a
