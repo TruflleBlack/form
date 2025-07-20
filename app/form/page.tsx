@@ -66,7 +66,7 @@ function FormPageInner() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch(`http://sistemundangan.wuaze.com/api/token.php?token=${encodeURIComponent(token)}`, {
+    fetch(`https://sistemundangan.wuaze.com/api/get_token.php?token=${encodeURIComponent(token)}`, {
       mode: 'cors',
     })
       .then(r => r.json())
