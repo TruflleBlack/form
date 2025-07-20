@@ -7,9 +7,56 @@ import StepForm from '../../components/StepForm';
 
 type TokenData = {
   token: string;
-  nama_pengantin: string;
-  no_wa: string;
-  status: 'belum isi' | 'sudah isi';
+  nomor_order: string;
+  status: string;
+  tema_undangan: string;
+  sub_tema: string;
+  paket_undangan: string;
+  pilihan_paket_tanpa_foto: string;
+  urutan_mempelai: string;
+  mulai_musik: number;
+  musik: string;
+  tema_link: string;
+  pria: {
+    panggilan: string;
+    lengkap: string;
+    anakKe: number;
+    ayah: string;
+    ibu: string;
+    sosmed: string;
+  };
+  wanita: {
+    panggilan: string;
+    lengkap: string;
+    anakKe: number;
+    ayah: string;
+    ibu: string;
+    sosmed: string;
+  };
+  acara_list: Array<{
+    nama: string;
+    tanggal: string;
+    waktu: string;
+    tempat: string;
+    link: string;
+    zona: string;
+  }>;
+  stories: Array<{
+    judul: string;
+    tanggal: string;
+    deskripsi: string;
+  }>;
+  angpao: {
+    bank: string;
+    rekening: string;
+    atasNama: string;
+  };
+  live: {
+    link: string;
+    tanggal: string;
+    waktu: string;
+    zona: string;
+  };
 };
 
 function FormPageInner() {
@@ -19,18 +66,13 @@ function FormPageInner() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch(`http://localhost/undangansistem/backend/api/token.php?token=${encodeURIComponent(token)}`, {
+    fetch(`http://localhost/undangansistem/backend/api/cek_token.php?token=${encodeURIComponent(token)}`, {
       mode: 'cors',
     })
       .then(r => r.json())
       .then(j => {
-        if (j.valid) {
-          setTokenData({
-            token: j.token,
-            nama_pengantin: j.nama_pengantin,
-            no_wa: j.no_wa,
-            status: j.status,
-          });
+        if (j.success) {
+          setTokenData(j);
         } else {
           setError(j.message || 'Token tidak valid');
         }
