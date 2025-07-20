@@ -72,7 +72,7 @@ function FormPageInner() {
     })
       .then(r => r.json())
       .then(j => {
-        if (j.success) {
+        if (j.valid) {
           setTokenData(j);
         } else {
           setError(j.message || 'Token tidak valid');
