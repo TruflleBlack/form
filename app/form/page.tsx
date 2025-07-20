@@ -67,7 +67,7 @@ function FormPageInner() {
 
   useEffect(() => {
     const API_BASE = process.env.NEXT_PUBLIC_API_BASE!;
-    fetch(`${API_BASE}/get_token.php?token=${encodeURIComponent(token)}`, {
+    fetch(`${API_BASE}/token.php?token=${encodeURIComponent(token)}`, {
       mode: 'cors',
     })
       .then(r => r.json())
