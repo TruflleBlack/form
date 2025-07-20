@@ -669,7 +669,7 @@ export default function StepForm({ tokenData }: StepFormProps) {
                         onClick={()=>setSubTema(sub.label)}
                         className={`group focus:outline-none border-2 rounded-xl overflow-hidden transition-all duration-200 p-1 ${subTema===sub.label ? 'border-[#B03052] shadow-lg' : 'border-transparent'}`}
                       >
-                        <Image src={sub.image} alt={sub.label} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
+                        <Image src={sub.image} alt={sub.label} width={200} height={112} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
                         <div className={`mt-2 text-center text-sm font-medium ${subTema===sub.label ? 'text-[#B03052]' : 'text-gray-700'}`}>{sub.label}</div>
                       </button>
                       <a
@@ -699,7 +699,7 @@ export default function StepForm({ tokenData }: StepFormProps) {
                         onClick={()=>setSubTema(sub.label)}
                         className={`group focus:outline-none border-2 rounded-xl overflow-hidden transition-all duration-200 p-1 ${subTema===sub.label ? 'border-[#B03052] shadow-lg' : 'border-transparent'}`}
                       >
-                        <Image src={sub.image} alt={sub.label} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
+                        <Image src={sub.image} alt={sub.label} width={200} height={112} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
                         <div className={`mt-2 text-center text-sm font-medium ${subTema===sub.label ? 'text-[#B03052]' : 'text-gray-700'}`}>{sub.label}</div>
                       </button>
                       <a
@@ -731,7 +731,7 @@ export default function StepForm({ tokenData }: StepFormProps) {
                         onClick={()=>setSubTema(anim.label)}
                         className={`group focus:outline-none border-2 rounded-xl overflow-hidden transition-all duration-200 p-1 ${subTema===anim.label ? 'border-[#B03052] shadow-lg' : 'border-transparent'}`}
                       >
-                        <Image src={anim.image} alt={anim.label} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
+                        <Image src={anim.image} alt={anim.label} width={200} height={112} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
                         <div className={`mt-2 text-center text-sm font-medium ${subTema===anim.label ? 'text-[#B03052]' : 'text-gray-700'}`}>{`Luxury Animasi ${String(idx+1).padStart(2, '0')}`}</div>
                       </button>
                       <a
@@ -762,7 +762,7 @@ export default function StepForm({ tokenData }: StepFormProps) {
                         onClick={()=>setSubTema(anim.label)}
                         className={`group focus:outline-none border-2 rounded-xl overflow-hidden transition-all duration-200 p-1 ${subTema===anim.label ? 'border-[#B03052] shadow-lg' : 'border-transparent'}`}
                       >
-                        <Image src={anim.image} alt={anim.label} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
+                        <Image src={anim.image} alt={anim.label} width={200} height={112} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
                         <div className={`mt-2 text-center text-sm font-medium ${subTema===anim.label ? 'text-xs text-pink-700 mb-4' : 'text-gray-700'}`}>{`Spesial Animasi ${String(idx+1).padStart(2, '0')}`}</div>
                       </button>
                       <a
@@ -793,7 +793,7 @@ export default function StepForm({ tokenData }: StepFormProps) {
                         onClick={()=>setSubTema(sub.label)}
                         className={`group focus:outline-none border-2 rounded-xl overflow-hidden transition-all duration-200 p-1 bg-white max-w-[160px] mx-auto ${subTema===sub.label ? 'border-[#B03052] shadow-lg' : 'border-transparent'}`}
                       >
-                        <Image src={sub.image} alt={sub.label} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
+                        <Image src={sub.image} alt={sub.label} width={200} height={112} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
                         <div className={`mt-2 text-center text-sm font-medium ${subTema===sub.label ? 'text-[#B03052]' : 'text-gray-700'}`}>{sub.label}</div>
                       </button>
                       <a
@@ -823,7 +823,7 @@ export default function StepForm({ tokenData }: StepFormProps) {
                         onClick={()=>setSubTema(anim.label)}
                         className={`group focus:outline-none border-2 rounded-xl overflow-hidden transition-all duration-200 p-1 bg-white max-w-[160px] mx-auto ${subTema===anim.label ? 'border-[#B03052] shadow-lg' : 'border-transparent'}`}
                       >
-                        <Image src={anim.image} alt={anim.label} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
+                        <Image src={anim.image} alt={anim.label} width={200} height={112} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
                         <div className={`mt-2 text-center text-sm font-medium ${subTema===anim.label ? 'text-[#B03052]' : 'text-gray-700'}`}>{anim.label}</div>
                       </button>
                       <a
@@ -853,7 +853,7 @@ export default function StepForm({ tokenData }: StepFormProps) {
                         onClick={()=>setSubTema(sub.label)}
                         className={`group focus:outline-none border-2 rounded-xl overflow-hidden transition-all duration-200 p-1 bg-white max-w-[160px] mx-auto ${subTema===sub.label ? 'border-[#B03052] shadow-lg' : 'border-transparent'}`}
                       >
-                        <Image src={sub.image} alt={sub.label} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
+                        <Image src={sub.image} alt={sub.label} width={200} height={112} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
                         <div className={`mt-2 text-center text-sm font-medium ${subTema===sub.label ? 'text-[#B03052]' : 'text-gray-700'}`}>{sub.label}</div>
                       </button>
                       <a
@@ -883,7 +883,7 @@ export default function StepForm({ tokenData }: StepFormProps) {
                         onClick={()=>setSubTema(anim.label)}
                         className={`group focus:outline-none border-2 rounded-xl overflow-hidden transition-all duration-200 p-1 bg-white max-w-[160px] mx-auto ${subTema===anim.label ? 'border-[#B03052] shadow-lg' : 'border-transparent'}`}
                       >
-                        <Image src={anim.image} alt={anim.label} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
+                        <Image src={anim.image} alt={anim.label} width={200} height={112} className="w-full h-28 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200" />
                         <div className={`mt-2 text-center text-sm font-medium ${subTema===anim.label ? 'text-[#B03052]' : 'text-gray-700'}`}>{anim.label}</div>
                       </button>
                       <a
