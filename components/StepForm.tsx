@@ -84,6 +84,11 @@ type Story = { judul: string; tanggal: string; deskripsi: string; };
 //   return '';
 // }
 
+function isMobileDevice() {
+  if (typeof window === 'undefined') return false;
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(window.navigator.userAgent);
+}
+
 export default function StepForm({ tokenData }: StepFormProps) {
   const steps = [
     'Tema & Paket',
@@ -463,23 +468,22 @@ export default function StepForm({ tokenData }: StepFormProps) {
   // WhatsApp redirect handler
   const handleWhatsAppRedirect = () => {
     const adminPhone = "6285329776096";
-    // Ganti \n dengan %0A sebelum encodeURIComponent
-    const message = generateWhatsAppMessage().replace(/\n/g, '%0A');
+    const isShort = isMobileDevice();
+    const message = generateWhatsAppMessage(isShort).replace(/\n/g, '%0A');
     window.location.href = `https://wa.me/${adminPhone}?text=${message}`;
   };
 
   // Generate WhatsApp message with form data recap
-  const generateWhatsAppMessage = () => {
+  const generateWhatsAppMessage = (isShort = false) => {
+    if (isShort) {
+      return "Halo min saya sudah mengisi formnya, Mohon informasi selanjutnya ya min";
+    }
     let msg = `Halo min, saya ${pria.panggilan} & ${wanita.panggilan} sudah mengisi form dengan rekap data seperti berikut:\n\n`;
-
-    // Tema & Paket
     msg += `*Tema:* ${temaUndangan}\n`;
     if (subTema) msg += `*Sub Tema:* ${subTema}\n`;
     msg += `*Paket:* ${paketUndangan}\n`;
     if (pilihanTanpaFoto) msg += `*Pilihan:* ${pilihanTanpaFoto}\n`;
     msg += `*Urutan Mempelai:* ${urutanMempelai === 'pria' ? 'Pria Didahulukan' : urutanMempelai === 'wanita' ? 'Wanita Didahulukan' : ''}\n\n`;
-
-    // Data Mempelai
     msg += `*Mempelai Pria:*\n`;
     msg += `- Nama Panggilan: ${pria.panggilan}\n`;
     msg += `- Nama Lengkap: ${pria.lengkap}\n`;
@@ -487,7 +491,6 @@ export default function StepForm({ tokenData }: StepFormProps) {
     msg += `- Ayah: ${pria.ayah}\n`;
     msg += `- Ibu: ${pria.ibu}\n`;
     if (pria.sosmed) msg += `- Sosmed: @${pria.sosmed}\n`;
-
     msg += `\n*Mempelai Wanita:*\n`;
     msg += `- Nama Panggilan: ${wanita.panggilan}\n`;
     msg += `- Nama Lengkap: ${wanita.lengkap}\n`;
@@ -495,8 +498,6 @@ export default function StepForm({ tokenData }: StepFormProps) {
     msg += `- Ayah: ${wanita.ayah}\n`;
     msg += `- Ibu: ${wanita.ibu}\n`;
     if (wanita.sosmed) msg += `- Sosmed: @${wanita.sosmed}\n`;
-
-    // Acara
     msg += `\n*Detail Acara:*\n`;
     acaraList.forEach((a, i) => {
       msg += `- Acara ${i+1}: ${a.nama}, ${a.tanggal} ${a.waktu} ${a.zona}`;
@@ -504,24 +505,16 @@ export default function StepForm({ tokenData }: StepFormProps) {
       if (a.link) msg += `, Maps: ${a.link}`;
       msg += `\n`;
     });
-
-    // Musik
     msg += `\n*Musik:*\n- URL: ${backsound}\n- Mulai di detik ke: ${mulaiMusik}\n`;
-
-    // Love Story
     if (stories.length) {
       msg += `\n*Love Story:*\n`;
       stories.forEach((s, i) => {
         msg += `- Story ${i+1}: ${s.judul} (${s.tanggal})\n  ${s.deskripsi}\n`;
       });
     }
-
-    // Amplop & Streaming
     msg += `\n*Amplop:*\n- Bank: ${angpao.bank}\n- No. Rekening: ${angpao.rekening}\n- Atas Nama: ${angpao.atasNama}\n`;
     msg += `\n*Live Streaming:*\n- Link: ${live.link}\n- Tanggal: ${live.tanggal}\n- Waktu: ${live.waktu} ${live.zona}\n`;
-
     msg += `\n---\nMohon informasi langkah selanjutnya ya min 🙏`;
-
     return msg;
   };
 
