@@ -10,13 +10,60 @@ import { Floating } from './Floating';
 dayjs.extend(utc);
 dayjs.extend(customParseFormat);
 
-const API_BASE = 'http://localhost/undangansistem/backend/api';
+const API_BASE = 'https://sistemundangan.wuaze.com/api';
 
 export type TokenData = {
   token: string;
-  nama_pengantin: string;
-  no_wa: string;
-  status: 'belum isi' | 'sudah isi';
+  nomor_order: string;
+  status: string;
+  tema_undangan: string;
+  sub_tema: string;
+  paket_undangan: string;
+  pilihan_paket_tanpa_foto: string;
+  urutan_mempelai: string;
+  mulai_musik: number;
+  musik: string;
+  tema_link: string;
+  pria: {
+    panggilan: string;
+    lengkap: string;
+    anakKe: number;
+    ayah: string;
+    ibu: string;
+    sosmed: string;
+  };
+  wanita: {
+    panggilan: string;
+    lengkap: string;
+    anakKe: number;
+    ayah: string;
+    ibu: string;
+    sosmed: string;
+  };
+  acara_list: Array<{
+    nama: string;
+    tanggal: string;
+    waktu: string;
+    tempat: string;
+    link: string;
+    zona: string;
+  }>;
+  stories: Array<{
+    judul: string;
+    tanggal: string;
+    deskripsi: string;
+  }>;
+  angpao: {
+    bank: string;
+    rekening: string;
+    atasNama: string;
+  };
+  live: {
+    link: string;
+    tanggal: string;
+    waktu: string;
+    zona: string;
+  };
 };
 type StepFormProps = { tokenData: TokenData };
 
