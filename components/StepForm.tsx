@@ -10,7 +10,7 @@ import { Floating } from './Floating';
 dayjs.extend(utc);
 dayjs.extend(customParseFormat);
 
-const API_BASE = 'https://sistemundangan.wuaze.com/api';
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE!;
 
 export type TokenData = {
   token: string;
@@ -215,7 +215,7 @@ export default function StepForm({ tokenData }: StepFormProps) {
     const fetchExistingData = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch(`${API_BASE}/cek_token?token=${encodeURIComponent(tokenData.token)}`, {
+        const response = await fetch(`${API_BASE}/cek_token.php?token=${encodeURIComponent(tokenData.token)}`, {
           method: 'GET',
           headers: {
             'Accept': 'application/json',
@@ -415,7 +415,7 @@ export default function StepForm({ tokenData }: StepFormProps) {
 
   const handleSubmit = async () => {
     try {
-      const res = await fetch(`${API_BASE}/submit_form`, {
+      const res = await fetch(`${API_BASE}/submit_form.php`, {
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body: JSON.stringify(payload)
