@@ -463,7 +463,7 @@ export default function StepForm({ tokenData }: StepFormProps) {
   // WhatsApp redirect handler
   const handleWhatsAppRedirect = () => {
     // Format: country code (62) + number without leading zero
-    const adminPhone = "6285329776096";
+    const adminPhone = "085329776096";
     const message = encodeURIComponent(generateWhatsAppMessage());
     window.location.href = `https://wa.me/${adminPhone}?text=${message}`;
   };
